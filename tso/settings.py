@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gitstar',
-    'django_tables2'
 ]
 
 MIDDLEWARE_CLASSES = [
