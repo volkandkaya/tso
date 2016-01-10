@@ -33,13 +33,12 @@ class Command(BaseCommand):
 
     def create_db_user(self, master_usr_list):
         for user in master_usr_list:
-            request = 'https://api.github.com/users/' + user
-            response = urllib.request.urlopen(request)
-            str_response = response.readall().decode('utf-8')
-            obj = json.loads(str_response)
-            print(obj)
-            print(len(Stargazer.objects.filter(login=obj['login'])))
-            if len(Stargazer.objects.filter(login=obj['login'])) == 0:
+            if len(Stargazer.objects.filter(login=user)) == 0:
+                request = 'https://api.github.com/users/' + user
+                response = urllib.request.urlopen(request)
+                str_response = response.readall().decode('utf-8')
+                obj = json.loads(str_response)
+                print(len(Stargazer.objects.filter(login=obj['login'])))
                 if obj['company'] == 'null'or obj['company'] is None:
                     obj['company'] = ""
                 if obj['blog'] == 'null' or obj['blog'] is None:
@@ -48,6 +47,9 @@ class Command(BaseCommand):
                     obj['location'] = ""
                 if obj['email'] == 'null' or obj['email'] is None:
                     obj['email'] = ""
+                if obj['name'] == 'null' or obj['name'] is None:
+                    obj['name'] = ""
+
                 django_obj = Stargazer.objects.create(login=obj['login'],
                                                       avatar_url=obj['avatar_url'],
                                                       url=obj['url'],
@@ -64,5 +66,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         url = 'https://api.github.com/repos/django-oscar/django-oscar'
         star_count = self.stargazer_count(url)
-        master_usr_list = self.master_user_list('django-oscar', 'django-oscar', star_count, '30')
+        master_usr_list = self.master_user_list('django-oscar', 'django-oscar', star_count, '20')
         self.create_db_user(master_usr_list)
