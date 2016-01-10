@@ -38,11 +38,39 @@
 	<br>
 	<div class="row" style="color: white;">
 	<form action="/" method="post">
-	<h1 class="text-center">Maximise your repo potential using GitHub Stats</h1>
+	<h1 class="text-center">Maximise your repo potential using GitStar</h1>
 	</form>
 	</div>
 </div>
 
+<br>
+<div class="container">
+	<table class="table table-hover">
+	  <tr>
+	    <th>Login</th>
+	    <th>Name</th>
+	    <th>Blog</th>
+      <th>Company</th>
+	    <th>Location</th>
+	    <th>Email</th>
+	    <th>Followers</th>
+	    <th>Following</th>
+
+	  </tr>
+	  {% for user in stargazers %}
+    <tr>
+	    <td><a href="{{ user.html_url }}">{{ user.login }}</a></td>
+	    <td>{{ user.name }}</td>
+	    <td>{{ user.blog }}</td>
+	    <td>{{ user.company }}</td>
+	    <td>{{ user.location }}</td>
+	    <td>{{ user.email }}</td>
+	    <td>{{ user.followers }}</td>
+      <td>{{ user.following }}</td>
+	  </tr>
+    {% endfor %}
+	</table>
+</div>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

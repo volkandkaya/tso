@@ -8,7 +8,7 @@ class Stargazer(models.Model):
     url = models.CharField(max_length=200)
     html_url = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    comapny = models.CharField(max_length=200)
+    company = models.CharField(max_length=200)
     blog = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
