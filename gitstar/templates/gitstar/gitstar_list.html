@@ -59,9 +59,9 @@
 	  </tr>
 	  {% for user in stargazers %}
     <tr>
-	    <td><a href="{{ user.html_url }}">{{ user.login }}</a></td>
+	    <td><a href="{{ user.html_url }}" target="_blank">{{ user.login }}</a></td>
 	    <td>{{ user.name }}</td>
-	    <td>{{ user.blog }}</td>
+	    <td><a href="{{ user.blog }}" target="_blank">{{ user.blog }}</a></td>
 	    <td>{{ user.company }}</td>
 	    <td>{{ user.location }}</td>
 	    <td>{{ user.email }}</td>

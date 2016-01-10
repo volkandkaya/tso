@@ -37,7 +37,8 @@ class Command(BaseCommand):
             response = urllib.request.urlopen(request)
             str_response = response.readall().decode('utf-8')
             obj = json.loads(str_response)
-
+            print(obj)
+            print(len(Stargazer.objects.filter(login=obj['login'])))
             if len(Stargazer.objects.filter(login=obj['login'])) == 0:
                 if obj['company'] == 'null'or obj['company'] is None:
                     obj['company'] = ""
@@ -63,5 +64,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         url = 'https://api.github.com/repos/django-oscar/django-oscar'
         star_count = self.stargazer_count(url)
-        master_usr_list = self.master_user_list('django-oscar', 'django-oscar', star_count, '10')
+        master_usr_list = self.master_user_list('django-oscar', 'django-oscar', star_count, '30')
         self.create_db_user(master_usr_list)
